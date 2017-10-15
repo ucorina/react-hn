@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 /* From https://github.com/tobiasahlin/SpinKit */
 var StyledSpinner = styled.div`
+   width: ${props => ((Number(props.size) + Number(props.spacing)) * 3)}px;
 `;
 
 const bouncedelay = keyframes`
@@ -11,6 +12,9 @@ const bouncedelay = keyframes`
 `;
 
 var Bounce = styled.div`
+  height: ${props => props.size}px;
+  width: ${props => props.size}px;
+  marginRight: ${props => props.spacing}px;
   background-color: #666;
   border-radius: 100%;
   display: inline-block;
@@ -35,12 +39,10 @@ var Spinner = React.createClass({
   },
 
   render() {
-    var bounceSize = this.props.size + 'px'
-    var bounceStyle = {height: bounceSize, width: bounceSize, marginRight: this.props.spacing + 'px'}
-    return <StyledSpinner style={{width: ((Number(this.props.size) + Number(this.props.spacing)) * 3) + 'px'}}>
-      <Bounce1 style={bounceStyle}/>
-      <Bounce2 style={bounceStyle}/>
-      <Bounce3 style={bounceStyle}/>
+    return <StyledSpinner>
+      <Bounce1/>
+      <Bounce2/>
+      <Bounce3/>
     </StyledSpinner>
   }
 })
