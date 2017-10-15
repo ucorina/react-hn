@@ -3,3 +3,4 @@
 /public/sw-toolbox.js
 dist
 /.idea
+/storybook-static

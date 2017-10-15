@@ -18,7 +18,9 @@
     "serve": "nwb serve",
     "copy-manifest": "cp public/manifest.json dist/manifest.json",
     "generate-sw": "node generate-sw.js",
-    "clean": "rm -rf *.json.gzip dist/index.html"
+    "clean": "rm -rf *.json.gzip dist/index.html",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "engines": {
     "node": "6.1.0"
@@ -51,6 +53,9 @@
   "devDependencies": {
     "html-webpack-plugin": "2.22.0",
     "webpack": "1.13.2",
-    "workbox-build": "0.0.2"
+    "workbox-build": "0.0.2",
+    "@storybook/react": "^3.2.12",
+    "@storybook/addon-actions": "^3.2.12",
+    "@storybook/addon-links": "^3.2.12"
   }
 }
