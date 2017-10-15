@@ -2,3 +2,4 @@
 /node_modules
 /public/sw-toolbox.js
 dist
+/.idea
