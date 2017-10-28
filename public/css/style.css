@@ -18,26 +18,6 @@ span.control:hover {
   text-decoration: underline;
 }
 
-.Settings {
-  box-sizing: border-box;
-  padding: .75em;
-  position: absolute;
-  width: 36%;
-  background-color: inherit;
-  right: 0;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
-}
-.Settings__setting td:first-child {
-  text-align: right;
-}
-.Settings p {
-  color: #fff;
-}
-.Settings div:last-child > p:last-child {
-  margin-bottom: 0;
-}
-
 .Items__list {
   padding-left: 3em;
   padding-right: 1.25em;

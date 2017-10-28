@@ -6,6 +6,7 @@ import { storiesOf } from '@storybook/react';
 
 import Spinner from '../src/Spinner';
 import App from '../src/App';
+import Settings from '../src/Settings';
 
 import '../public/css/style.css';
 
@@ -16,4 +17,9 @@ storiesOf('Spinner', module)
 storiesOf('App', module)
     .add('default', () => (
         <App params={{ prebootHTML: '' }} />
+    ))
+
+storiesOf('Settings', module)
+    .add('default', () => (
+        <Settings key="test"/>
     ))

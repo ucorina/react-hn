@@ -1,10 +1,40 @@
 var React = require('react')
+import styled from 'styled-components';
+
+var SettingsContainer = styled.div`
+  box-sizing: border-box;
+  padding: .75em;
+  position: absolute;
+  width: 36%;
+  background-color: inherit;
+  right: 0;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+
+  p {
+    color: #fff;
+  }
+
+  div:last-child > p:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+var Setting = styled.div`
+  td:first-child {
+    text-align: right;
+  }
+`;
+
+var CheckboxSetting = styled(Setting)`
+
+`;
 
 var SettingsStore = require('./stores/SettingsStore')
 
 var Settings = React.createClass({
   componentDidMount() {
-    this.refs.container.focus()
+    this.settingsContainer.focus()
   },
 
   onChange(e) {
@@ -24,39 +54,39 @@ var Settings = React.createClass({
   },
 
   render() {
-    return <div ref="container" className="Settings" tabIndex="-1" onClick={this.onClick}>
+    return <SettingsContainer innerRef={(container) => (this.settingsContainer = container)} tabIndex="-1" onClick={this.onClick}>
       <form onChange={this.onChange}>
-        <div className="Settings__setting Settings__setting--checkbox">
+        <CheckboxSetting>
           <label htmlFor="autoCollapse">
             <input type="checkbox" name="autoCollapse" id="autoCollapse" checked={SettingsStore.autoCollapse}/> auto collapse
           </label>
           <p>Automatically collapse comment threads without new comments on page load.</p>
-        </div>
-        <div className="Settings__setting Settings__setting--checkbox">
+        </CheckboxSetting>
+        <CheckboxSetting>
           <label htmlFor="replyLinks">
             <input type="checkbox" name="replyLinks" id="replyLinks" checked={SettingsStore.replyLinks}/> show reply links
           </label>
           <p>Show "reply" links to Hacker News</p>
-        </div>
-        <div className="Settings__setting Settings__setting--checkbox">
+        </CheckboxSetting>
+        <CheckboxSetting>
           <label htmlFor="offlineMode">
             <input type="checkbox" name="offlineMode" id="offlineMode" checked={SettingsStore.offlineMode}/> Offline Mode
           </label>
           <p>Cache comments and content offline.</p>
-        </div>
-        <div className="Settings__setting Settings__setting--checkbox">
+        </CheckboxSetting>
+        <CheckboxSetting>
           <label htmlFor="showDead">
             <input type="checkbox" name="showDead" id="showDead" checked={SettingsStore.showDead}/> show dead
           </label>
           <p>Show items flagged as dead.</p>
-        </div>
-        <div className="Settings__setting Settings__setting--checkbox">
+        </CheckboxSetting>
+        <CheckboxSetting>
           <label htmlFor="showDeleted">
             <input type="checkbox" name="showDeleted" id="showDeleted" checked={SettingsStore.showDeleted}/> show deleted
           </label>
           <p>Show comments flagged as deleted in threads.</p>
-        </div>
-        <div className="Settings__setting">
+        </CheckboxSetting>
+        <Setting>
           <table>
             <tbody>
               <tr>
@@ -69,9 +99,9 @@ var Settings = React.createClass({
               </tr>
             </tbody>
           </table>
-        </div>
+        </Setting>
       </form>
-    </div>
+    </SettingsContainer>
   }
 })
 
