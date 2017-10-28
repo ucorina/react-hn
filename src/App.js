@@ -7,6 +7,83 @@ var StoryStore = require('./stores/StoryStore')
 var UpdatesStore = require('./stores/UpdatesStore')
 var SettingsStore = require('./stores/SettingsStore')
 
+import styled from 'styled-components';
+
+var StyledApp = styled.div`
+`;
+
+var AppWrap = styled.div`
+  width: 90%;
+  max-width: 1280px;
+  margin: 8px auto;
+  color: #000;
+  background-color: #f5f5f5;
+  font-size: 13.3333px;
+  font-family: Verdana, Geneva, sans-serif;
+`;
+
+var AppHeader = styled.div`
+  color: #00d8ff;
+  background-color: #222;
+  padding: 6px;
+  line-height: 18px;
+  vertical-align: middle;
+  position: relative;
+
+  img {
+    border: 1px solid #00d8ff;
+    margin-right: .25em;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &.active {
+      color: #fff;
+    }
+  }
+`;
+
+var AppContent = styled.div`
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+`;
+
+var AppFooter = styled.div`
+  margin-top: 1em;
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+  color: #333;
+  padding: 6px 0;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+`;
+
+var HomeLinkIcon = styled(Link)`
+`;
+
+var HomeLink = styled(Link)`
+  text-decoration: none;
+  font-weight: bold;
+  color: #00d8ff !important;
+  margin-right: .75em;
+
+  &.active {
+    color: #fff !important;
+  }
+`;
+
+var AppSettings = styled.a`
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  cursor: pointer;
+`;
+
 var App = React.createClass({
   getInitialState() {
     return {
@@ -49,30 +126,30 @@ var App = React.createClass({
   },
 
   render() {
-    return <div className="App" onClick={this.state.showSettings && this.toggleSettings}>
-      <div className="App__wrap">
-        <div className="App__header">
-          <Link to="/news" className="App__homelinkicon"><img src="img/logo.png" width="16" height="16" alt="" /></Link>{' '}
-          <Link to="/news" activeClassName="active" className="App__homelink">React HN</Link>{' '}
+    return <StyledApp onClick={this.state.showSettings && this.toggleSettings}>
+      <AppWrap>
+        <AppHeader>
+          <HomeLinkIcon to="/news"><img src="img/logo.png" width="16" height="16" alt="" /></HomeLinkIcon>{' '}
+          <HomeLink to="/news" activeClassName="active">React HN</HomeLink>{' '}
           <Link to="/newest" activeClassName="active">new</Link>{' | '}
           <Link to="/newcomments" activeClassName="active">comments</Link> {' | '}
           <Link to="/show" activeClassName="active">show</Link>{' | '}
           <Link to="/ask" activeClassName="active">ask</Link>{' | '}
           <Link to="/jobs" activeClassName="active">jobs</Link>
-          <a className="App__settings" tabIndex="0" onClick={this.toggleSettings} onKeyPress={this.toggleSettings}>
+          <AppSettings tabIndex="0" onClick={this.toggleSettings} onKeyPress={this.toggleSettings}>
             {this.state.showSettings ? 'hide settings' : 'settings'}
-          </a>
+          </AppSettings>
           {this.state.showSettings && <Settings key="settings"/>}
-        </div>
-        <div className="App__content">
+        </AppHeader>
+        <AppContent>
           <div dangerouslySetInnerHTML={{ __html: this.state.prebootHTML }}/>
           {this.state.showChildren ? this.props.children : ''}
-        </div>
-        <div className="App__footer">
+        </AppContent>
+        <AppFooter>
           <a href="https://github.com/insin/react-hn">insin/react-hn</a>
-        </div>
-      </div>
-    </div>
+        </AppFooter>
+      </AppWrap>
+    </StyledApp>
   }
 })
 
