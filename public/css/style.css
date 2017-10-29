@@ -18,54 +18,6 @@ span.control:hover {
   text-decoration: underline;
 }
 
-.Item__content,
-.Item--loading {
-  padding: 1em 1.25em 0 1.25em;
-  margin-bottom: 1em;
-}
-.Item__title {
-  color: #666;
-  font-size:18px;
-}
-.Item__title a {
-  text-decoration: none;
-  color: #000;
-}
-.Item__title a:hover {
-  text-decoration: underline;
-}
-.Item__title a:visited {
-  color: #666;
-}
-.Item__meta {
-  color: #666;
-}
-.Item > .Item__meta {
-  margin-bottom: 1em;
-}
-.Item__meta a {
-  text-decoration: none;
-  color: inherit;
-}
-.Item__meta a:hover {
-  text-decoration: underline;
-}
-.Item__meta em {
-  font-style: normal;
-  background-color: #ffffde;
-  color: #000;
-}
-.Item__by a, .ListItem__newcomments a {
-  font-weight: bold;
-}
-.Item__text {
-  margin-top: 1em;
-}
-.Item__poll {
-  margin-top: 1em;
-  padding-left: 2.5em;
-}
-
 .PollOption {
   margin-bottom: 10px;
 }

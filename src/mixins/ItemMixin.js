@@ -6,6 +6,10 @@ var SettingsStore = require('../stores/SettingsStore')
 var pluralise = require('../utils/pluralise')
 var urlParse = require('url-parse')
 
+import { ItemTitle, ItemMeta, ItemBy, ItemTime, ItemScore, ItemHost } from '../Items';
+
+var ItemTimeAgo = ItemTime.withComponent(TimeAgo);
+
 var parseHost = function(url) {
   var hostname = (urlParse(url, true)).hostname
   var parts = hostname.split('.').slice(-3)
@@ -26,25 +30,25 @@ var ItemMixin = {
     var itemDate = new Date(item.time * 1000)
 
     if (item.type === 'job') {
-      return <div className="Item__meta">
-        <TimeAgo date={itemDate} className="Item__time"/>
-      </div>
+      return <ItemMeta>
+        <ItemTimeAgo date={itemDate}/>
+      </ItemMeta>
     }
 
-    return <div className="Item__meta">
-      <span className="Item__score">
+    return <ItemMeta>
+      <ItemScore>
         {item.score} point{pluralise(item.score)}
-      </span>{' '}
-      <span className="Item__by">
+      </ItemScore>{' '}
+      <ItemBy>
         by <Link to={`/user/${item.by}`}>{item.by}</Link>
-      </span>{' '}
-      <TimeAgo date={itemDate} className="Item__time"/>
+      </ItemBy>{' '}
+      <ItemTimeAgo date={itemDate}/>
       {' | '}
       <Link to={`/${item.type}/${item.id}`}>
         {item.descendants > 0 ? item.descendants + ' comment' + pluralise(item.descendants) : 'discuss'}
       </Link>
       {extraContent}
-    </div>
+    </ItemMeta>
   },
 
   /**
@@ -60,11 +64,11 @@ var ItemMixin = {
       title = (hasURL ? <a href={item.url}>{item.title}</a>
                       : <Link to={`/${item.type}/${item.id}`}>{item.title}</Link>)
     }
-    return <div className="Item__title" style={{fontSize: SettingsStore.titleFontSize}}>
+    return <ItemTitle style={{fontSize: SettingsStore.titleFontSize}}>
       {title}
       {hasURL && ' '}
-      {hasURL && <span className="Item__host">({parseHost(item.url)})</span>}
-    </div>
+      {hasURL && <ItemHost>({parseHost(item.url)})</ItemHost>}
+    </ItemTitle>
   }
 }
 

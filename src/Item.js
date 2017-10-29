@@ -16,6 +16,34 @@ var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
 var SettingsStore = require('./stores/SettingsStore')
+import { ItemKids } from './Items';
+
+import styled from 'styled-components';
+
+var contentSpacing = {
+  padding: '1em 1.25em 0 1.25em',
+  marginBottom: '1em'
+};
+
+var StyledItem = styled.div.attrs(contentSpacing)`
+  padding: ${props => props.loading ? props.padding : ''}
+  margin-bottom: ${props => props.loading ? props.marginBottom : ''}
+  ${props => props.dead ? '' : ''}
+`;
+
+var ItemContent = styled.div.attrs(contentSpacing)`
+  padding: ${props => props.padding}
+  margin-bottom: ${props => props.marginBottom}
+`;
+
+var ItemText = styled.div`
+  margin-top: 1em;
+`;
+
+var ItemPoll = styled.div`
+  margin-top: 1em;
+  padding-left: 2.5em;
+`;
 
 function timeUnitsAgo(value, unit, suffix) {
   if (value === 1) {
@@ -150,9 +178,9 @@ var Item = React.createClass({
     var state = this.state
     var item = state.item
     var threadStore = this.threadStore
-    if (!item.id || !threadStore) { return <div className="Item Item--loading"><Spinner size="20"/></div> }
-    return <div className={cx('Item', {'Item--dead': item.dead})}>
-      <div className="Item__content">
+    if (!item.id || !threadStore) { return <StyledItem loading><Spinner size="20"/></StyledItem> }
+    return <StyledItem dead={item.dead}>
+      <ItemContent>
         {this.renderItemTitle(item)}
         {this.renderItemMeta(item, (threadStore.lastVisit !== null && threadStore.newCommentCount > 0 && <span>{' '}
           (<em>{threadStore.newCommentCount} new</em> in the last <TimeAgo date={threadStore.lastVisit} formatter={timeUnitsAgo}/>{') | '}
@@ -163,24 +191,24 @@ var Item = React.createClass({
             mark as read
           </span>
         </span>))}
-        {item.text && <div className="Item__text">
+        {item.text && <ItemText>
           <div dangerouslySetInnerHTML={{__html: item.text}}/>
-        </div>}
-        {item.type === 'poll' && <div className="Item__poll">
+        </ItemText>}
+        {item.type === 'poll' && <ItemPoll>
           {item.parts.map(function(id) {
             return <PollOption key={id} id={id}/>
           })}
-        </div>}
-      </div>
-      {item.kids && <div className="Item__kids">
+        </ItemPoll>}
+      </ItemContent>
+      {item.kids && <ItemKids>
         {item.kids.map(function(id, index) {
           return <Comment key={id} id={id} level={0}
             loadingSpinner={index === 0}
             threadStore={threadStore}
           />
         })}
-      </div>}
-    </div>
+      </ItemKids>}
+    </StyledItem>
   }
 })
 

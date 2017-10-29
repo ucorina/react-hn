@@ -23,9 +23,66 @@ var ListItemNewComments = styled.span`
     }
 `;
 
+var ItemTitle = styled.div`
+    color: #666;
+    font-size:18px;
+
+    a {
+        text-decoration: none;
+        color: #000;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:visited {
+            color: #666;
+        }
+    }
+`;
+
+var ItemMeta = styled.div`
+    color: #666;
+    margin-bottom: 1em;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    em {
+        font-style: normal;
+        background-color: #ffffde;
+        color: #000;
+    }
+`;
+
+var ItemBy = styled.span`
+    a {
+        font-weight: bold;
+    }
+`;
+
+var ItemHost = styled.span``;
+var ItemScore = styled.span``;
+var ItemTime = styled.time``;
+var ItemKids = styled.div``;
+
 export {
     Items,
     ItemsList,
     ListItem,
-    ListItemNewComments
+    ListItemNewComments,
+    ItemTitle,
+    ItemMeta,
+    ItemBy,
+    ItemText,
+    ItemHost,
+    ItemScore,
+    ItemTime,
+    ItemKids
 }

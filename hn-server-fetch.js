@@ -1,5 +1,6 @@
 require('isomorphic-fetch')
-import { ItemsList, ListItem } from './src/Items';
+import { ItemsList, ListItem, ItemTitle, ItemMeta, ItemBy, 
+	ItemHost, ItemScore, ItemTime, ItemKids } from './src/Items';
 
 /*
 The official Firebase API (https://github.com/HackerNews/API) requires multiple network
@@ -29,12 +30,12 @@ exports.fetchNews = function(page) {
 	  var stories = '<ItemsList start="1">'
 	  json.forEach(function(data, index) {
 	      var story = '<ListItem style="margin-bottom: 16px;">' +
-	          '<div class="Item__title" style="font-size: 18px;"><a href="' + data.url + '">' + data.title + '</a> ' +
-	          '<span class="Item__host">(' + data.domain + ')</span></div>' +
-	          '<div class="Item__meta"><span class="Item__score">' + data.points + ' points</span> ' +
-	          '<span class="Item__by">by <a href="https://news.ycombinator.com/user?id=' + data.user + '">' + data.user + '</a></span> ' +
-	          '<time class="Item__time">' + data.time_ago + ' </time> | ' +
-	          '<a href="/news/story/' + data.id + '">' + data.comments_count + ' comments</a></div>'
+	          '<ItemTitle style="font-size: 18px;"><a href="' + data.url + '">' + data.title + '</a> ' +
+	          '<ItemHost>(' + data.domain + ')</ItemHost></ItemTitle>' +
+	          '<ItemMeta><ItemScore>' + data.points + ' points</ItemScore> ' +
+	          '<ItemBy>by <a href="https://news.ycombinator.com/user?id=' + data.user + '">' + data.user + '</a></ItemBy> ' +
+	          '<ItemTime>' + data.time_ago + ' </ItemTime> | ' +
+	          '<a href="/news/story/' + data.id + '">' + data.comments_count + ' comments</a></ItemMeta>'
 	      '</ListItem>'
 	      stories += story
 	  })
@@ -81,7 +82,7 @@ exports.fetchItem = function(itemId) {
 	}).then(function(json) {
 		var comments = ''
 		json.comments.forEach(function(data, index) {
-			var comment = '<div class="Item__kids">' + 
+			var comment = '<ItemKids>' + 
 			'<div class="Comment Comment--level0">' +
 		    '<div class="Comment__content">' +
 		        '<div class="Comment__meta"><span class="Comment__collapse" tabindex="0">[–]</span> ' +
@@ -93,7 +94,7 @@ exports.fetchItem = function(itemId) {
 		            '<p><a href="https://news.ycombinator.com/reply?id=' + data.id + '">reply</a></p>' +
 		        '</div>' +
 		    '</div>' +
-		   '</div>'
+		   '</ItemKids>'
 			comments += generateNestedCommentString(data) + '</div>' + comment
 		})
 		return comments
