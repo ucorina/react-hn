@@ -7,6 +7,15 @@ var Spinner = require('./Spinner')
 
 var pluralise = require('./utils/pluralise')
 
+var styled = require('styled-components').default;
+var StyledPollOption = styled.div`
+  margin-bottom: 10px;
+`;
+var PollOptionScore = styled.div`
+  color: #666;
+`;
+var PollOptionText = styled.div``;
+
 var PollOption = React.createClass({
   mixins: [ReactFireMixin],
 
@@ -20,15 +29,15 @@ var PollOption = React.createClass({
 
   render() {
     var pollopt = this.state.pollopt
-    if (!pollopt.id) { return <div className="PollOption PollOption--loading"><Spinner size="20"/></div> }
-    return <div className="PollOption">
-      <div className="PollOption__text">
+    if (!pollopt.id) { return <StyledPollOption loading><Spinner size="20"/></StyledPollOption> }
+    return <StyledPollOption>
+      <PollOptionText>
         {pollopt.text}
-      </div>
-      <div className="PollOption__score">
+      </PollOptionText>
+      <PollOptionScore>
         {pollopt.score} point{pluralise(pollopt.score)}
-      </div>
-    </div>
+      </PollOptionScore>
+    </StyledPollOption>
   }
 })
 

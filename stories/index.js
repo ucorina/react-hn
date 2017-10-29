@@ -18,6 +18,8 @@ UpdatesStore.loadSession();
 import { StyledComment, CommentContent, CommentText, 
     CommentMeta, CommentUser, CommentCollapse } from '../src/StyledComment';
 
+import PollOption from '../src/PollOption';
+
 import '../public/css/style.css';
 
 storiesOf('Spinner', module)
@@ -95,3 +97,6 @@ storiesOf('Comment', module)
             </CommentText>
         </CommentContent>
     </StyledComment>)
+
+storiesOf('Poll option', module)
+    .add('default', () => <PollOption id={6527104}></PollOption>)
