@@ -1,5 +1,6 @@
 var React = require('react')
 var styled = require('styled-components').default;;
+var narrowScreen = require('./media').narrowScreen;
 
 var SettingsContainer = styled.div`
   box-sizing: border-box;
@@ -17,6 +18,13 @@ var SettingsContainer = styled.div`
 
   div:last-child > p:last-child {
     margin-bottom: 0;
+  }
+
+  @media ${narrowScreen} {
+    ${/* Safari only fix to ensure Settings menu is full width */ ''}
+    _::-webkit-:not(:root:root), .Settings {
+      width: 100%;
+    }
   }
 `;
 

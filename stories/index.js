@@ -21,8 +21,6 @@ import { StyledComment, CommentContent, CommentText,
 import PollOption from '../src/PollOption';
 import UserProfile from '../src/UserProfile';
 
-import '../public/css/style.css';
-
 storiesOf('Spinner', module)
     .add('default', () => <Spinner/>)
     .add('custom size', () => <Spinner size='20'/>)

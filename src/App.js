@@ -9,6 +9,10 @@ var SettingsStore = require('./stores/SettingsStore')
 
 var styled = require('styled-components').default;
 var injectGlobal = require('styled-components').injectGlobal;
+
+var iPhone5 = require('./media').iPhone5;
+var narrowScreen = require('./media').narrowScreen;
+
 injectGlobal`
   body {
     background-color: #fff;
@@ -36,6 +40,11 @@ var AppWrap = styled.div`
   background-color: #f5f5f5;
   font-size: 13.3333px;
   font-family: Verdana, Geneva, sans-serif;
+
+  @media ${narrowScreen} {
+    width: 100%;
+    margin: 0px auto;
+  }
 `;
 
 var AppHeader = styled.div`
@@ -91,6 +100,10 @@ var HomeLink = styled(Link)`
   &.active {
     color: #fff !important;
   }
+
+  @media ${narrowScreen} {
+    display: none;
+  }
 `;
 
 var AppSettings = styled.a`
@@ -98,6 +111,10 @@ var AppSettings = styled.a`
   top: 6px;
   right: 10px;
   cursor: pointer;
+
+  @media ${iPhone5} {
+    display: none;
+  }
 `;
 
 var App = React.createClass({
