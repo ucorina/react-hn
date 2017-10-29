@@ -21,7 +21,7 @@ var ListItemMixin = {
   renderListItem(item, threadState) {
     if (item.deleted) { return null }
     var newCommentCount = this.getNewCommentCount(item, threadState)
-    return <ListItem dead={item.dead} style={{marginBottom: SettingsStore.listSpacing}}>
+    return <ListItem dead={item.dead}>
       {this.renderItemTitle(item)}
       {this.renderItemMeta(item, (newCommentCount > 0 && <ListItemNewComments>{' '}
         (<Link to={`/${item.type}/${item.id}`}>

@@ -74,7 +74,7 @@ var Stories = React.createClass({
       var dummyItems = []
       for (var i = page.startIndex; i < page.endIndex; i++) {
         dummyItems.push(
-          <ListItem loading key={i} style={{marginBottom: SettingsStore.listSpacing}}>
+          <ListItem loading key={i}>
             <Spinner/>
           </ListItem>
         )

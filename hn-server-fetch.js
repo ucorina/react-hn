@@ -2,6 +2,9 @@ require('isomorphic-fetch')
 const StyledItemsModule = require('./src/Items');
 const StyledCommentModule = require('./src/StyledComment');
 
+const ThemeProvider = require('styled-components').ThemeProvider;
+const theme = require('./src/theme').theme;
+
 let { ItemsList, ListItem, ItemTitle, ItemMeta, ItemBy, 
 	ItemHost, ItemScore, ItemTime, ItemKids } = StyledItemsModule;
 
@@ -35,8 +38,8 @@ exports.fetchNews = function(page) {
 	}).then(function(json) {
 	  var stories = '<ItemsList start="1">'
 	  json.forEach(function(data, index) {
-	      var story = '<ListItem style="margin-bottom: 16px;">' +
-	          '<ItemTitle style="font-size: 18px;"><a href="' + data.url + '">' + data.title + '</a> ' +
+	      var story = '<ListItem>' +
+	          '<ItemTitle><a href="' + data.url + '">' + data.title + '</a> ' +
 	          '<ItemHost>(' + data.domain + ')</ItemHost></ItemTitle>' +
 	          '<ItemMeta><ItemScore>' + data.points + ' points</ItemScore> ' +
 	          '<ItemBy>by <a href="https://news.ycombinator.com/user?id=' + data.user + '">' + data.user + '</a></ItemBy> ' +
@@ -46,7 +49,7 @@ exports.fetchNews = function(page) {
 	      stories += story
 	  })
 	  stories += '</ItemsList>'
-	  return stories
+	  return `<ThemeProvider theme='${theme}'>${stories}</ThemeProvider>`;
 	})		
 }
 
@@ -103,6 +106,6 @@ exports.fetchItem = function(itemId) {
 		   '</StyledComment>'
 			comments += generateNestedCommentString(data) + '</ItemKids>' + comment
 		})
-		return comments
+		return `<ThemeProvider theme='${theme}'>${comments}</ThemeProvider>`;
 	})
 }

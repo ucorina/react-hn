@@ -125,7 +125,7 @@ var StoryListItem = React.createClass({
   render() {
     // Display the loading spinner if we have nothing to show initially
     if (!this.state.item || !this.state.item.id) {
-      return <ListItem loading style={{marginBottom: SettingsStore.listSpacing}}>
+      return <ListItem loading>
         <Spinner/>
       </ListItem>
     }

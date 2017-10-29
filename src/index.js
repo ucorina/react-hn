@@ -10,4 +10,11 @@ var history = createHashHistory()
 
 var routes = require('./routes')
 
-render(<Router history={history} render={applyRouterMiddleware(useScroll())} routes={routes}/>, document.getElementById('app'))
+const ThemeProvider = require('styled-components').ThemeProvider;
+const theme = require('./src/theme').theme;
+
+render(
+    <ThemeProvider theme={theme}>
+        <Router history={history} render={applyRouterMiddleware(useScroll())} routes={routes}/>
+    </ThemeProvider>
+, document.getElementById('app'))

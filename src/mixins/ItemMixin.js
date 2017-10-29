@@ -65,7 +65,7 @@ var ItemMixin = {
       title = (hasURL ? <a href={item.url}>{item.title}</a>
                       : <Link to={`/${item.type}/${item.id}`}>{item.title}</Link>)
     }
-    return <ItemTitle style={{fontSize: SettingsStore.titleFontSize}}>
+    return <ItemTitle>
       {title}
       {hasURL && ' '}
       {hasURL && <ItemHost>({parseHost(item.url)})</ItemHost>}

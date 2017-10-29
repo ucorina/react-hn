@@ -11,8 +11,8 @@ var ItemsList = styled.ol`
     margin-bottom: .5em;
 `;
 
-var ListItem = styled.li`
-    margin-bottom: 16px;    
+var ListItem = styled.li`  
+    margin-bottom: ${props => props.theme.listSpacing};
     ${props => props.dead ? '' : ''}
     ${props => props.loading ? 'min-height: 34px;' : ''}
 `;
@@ -26,6 +26,7 @@ var ListItemNewComments = styled.span`
 var ItemTitle = styled.div`
     color: #666;
     font-size:18px;
+    fontSize: ${props => props.theme.titleFontSize}
 
     a {
         text-decoration: none;
