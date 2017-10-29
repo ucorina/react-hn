@@ -10,6 +10,7 @@ import Settings from '../src/Settings';
 import Stories from '../src/Stories';
 import { Items, ItemsList, ListItem, ListItemNewComments } from '../src/Items';
 import Updates from '../src/Updates';
+import Paginator from '../src/Paginator';
 
 import UpdatesStore from '../src/stores/UpdatesStore';
 UpdatesStore.loadSession();
@@ -69,3 +70,9 @@ storiesOf('List item', module)
 storiesOf('Updates', module)
     .add('default', () =>  
         <Updates key={'jobs'} type={'jobs'} location={{ query: { page: 1 }}}/>)
+
+        
+storiesOf('Paginator', module)
+    .add('one page', () => <Paginator route={'home'} page={1} hasNext={true}/>)
+    .add('multiple pages', () => <Paginator route={'home'} page={4} hasNext={true}/>)
+    .add('last page', () => <Paginator route={'home'} page={4} hasNext={false}/>)

@@ -17,18 +17,6 @@ span.control {
 span.control:hover {
   text-decoration: underline;
 }
-.Paginator {
-  margin-left: 3em;
-  padding: .5em 0;
-}
-.Paginator a {
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-}
-.Paginator a:hover {
-  text-decoration: underline;
-}
 
 .Item__content,
 .Item--loading {
