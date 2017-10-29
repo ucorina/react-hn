@@ -1,6 +1,12 @@
 require('isomorphic-fetch')
-import { ItemsList, ListItem, ItemTitle, ItemMeta, ItemBy, 
-	ItemHost, ItemScore, ItemTime, ItemKids } from './src/Items';
+const StyledItemsModule = require('./src/Items');
+const StyledCommentModule = require('./src/StyledComment');
+
+let { ItemsList, ListItem, ItemTitle, ItemMeta, ItemBy, 
+	ItemHost, ItemScore, ItemTime, ItemKids } = StyledItemsModule;
+
+let { StyledComment, CommentKids, CommentContent, 
+	CommentMeta, ComentUser, CommentText, CommentCollapse } = StyledCommentModule;
 
 /*
 The official Firebase API (https://github.com/HackerNews/API) requires multiple network
@@ -45,20 +51,20 @@ exports.fetchNews = function(page) {
 }
 
 function renderNestedComment(data) {
-	return '<div class="Comment__kids">' +
-		        '<div class="Comment Comment--level1">' +
-		            '<div class="Comment__content">' +
-		                '<div class="Comment__meta"><span class="Comment__collapse" tabindex="0">[–]</span> ' +
-		                    '<a class="Comment__user" href="#/user/' + data.user + '">' + data.user + '</a> ' +
+	return '<CommentKids>' +
+		        '<StyledComment level={1}>' +
+		            '<CommentContent>' +
+		                '<CommentMeta><CommentCollapse tabindex="0">[–]</CommentCollapse> ' +
+		                    '<CommentUser href="#/user/' + data.user + '">' + data.user + '</CommentUser> ' +
 		                    '<time>' + data.time_ago + '</time> ' +
-		                    '<a href="#/comment/' + data.id + '">link</a></div> ' +
-		                '<div class="Comment__text">' +
+		                    '<a href="#/comment/' + data.id + '">link</a></CommentMeta> ' +
+		                '<CommentText>' +
 		                    '<div>' + data.content +'</div> ' +
 		                    '<p><a href="https://news.ycombinator.com/reply?id=' + data.id + '">reply</a></p>' +
-		                '</div>' +
-		            '</div>' +
-		        '</div>' +
-		    '</div>'
+		                '</CommentText>' +
+		            '</CommentContent>' +
+		        '</StyledComment>' +
+		    '</CommentKids>'
 }
 
 function generateNestedCommentString(data) {
@@ -83,19 +89,19 @@ exports.fetchItem = function(itemId) {
 		var comments = ''
 		json.comments.forEach(function(data, index) {
 			var comment = '<ItemKids>' + 
-			'<div class="Comment Comment--level0">' +
-		    '<div class="Comment__content">' +
-		        '<div class="Comment__meta"><span class="Comment__collapse" tabindex="0">[–]</span> ' +
-		            '<a class="Comment__user" href="#/user/' + data.user + '">' + data.user + '</a> ' +
+			'<StyledComment level={0}>' +
+		    '<CommentContent>' +
+		        '<CommentMeta><CommentCollapse tabindex="0">[–]</CommentCollapse> ' +
+		            '<CommentUser href="#/user/' + data.user + '">' + data.user + '</CommentUser> ' +
 		            '<time>' + data.time_ago + '</time> ' +
-		            '<a href="#/comment/' + data.id + '">link</a></div> ' +
-		        '<div class="Comment__text">' +
+		            '<a href="#/comment/' + data.id + '">link</a></CommentMeta> ' +
+		        '<CommentText>' +
 		            '<div>' + data.content +'</div> ' + 
 		            '<p><a href="https://news.ycombinator.com/reply?id=' + data.id + '">reply</a></p>' +
-		        '</div>' +
-		    '</div>' +
-		   '</ItemKids>'
-			comments += generateNestedCommentString(data) + '</div>' + comment
+		        '</CommentText>' +
+		   '</CommentContent>' +
+		   '</StyledComment>'
+			comments += generateNestedCommentString(data) + '</ItemKids>' + comment
 		})
 		return comments
 	})

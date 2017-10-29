@@ -15,6 +15,9 @@ import Paginator from '../src/Paginator';
 import UpdatesStore from '../src/stores/UpdatesStore';
 UpdatesStore.loadSession();
 
+import { StyledComment, CommentContent, CommentText, 
+    CommentMeta, CommentUser, CommentCollapse } from '../src/StyledComment';
+
 import '../public/css/style.css';
 
 storiesOf('Spinner', module)
@@ -76,3 +79,19 @@ storiesOf('Paginator', module)
     .add('one page', () => <Paginator route={'home'} page={1} hasNext={true}/>)
     .add('multiple pages', () => <Paginator route={'home'} page={4} hasNext={true}/>)
     .add('last page', () => <Paginator route={'home'} page={4} hasNext={false}/>)
+
+storiesOf('Comment', module)
+    .add('default', () => <StyledComment>
+        <CommentContent>
+            <CommentMeta>
+                <CommentCollapse tabindex="0">[-]</CommentCollapse>
+                <CommentUser href='#'>john doe</CommentUser>
+                <time>3 minutes ago</time>
+                <a href='#'>link</a>
+            </CommentMeta>
+            <CommentText>
+                <div>I have the first comment!</div>
+                <p><a href='#'>reply</a></p>
+            </CommentText>
+        </CommentContent>
+    </StyledComment>)

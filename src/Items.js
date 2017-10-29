@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+const styled = require('styled-components');
 
 var Items = styled.div`
     ${props => props.loading ? '' : ''}
@@ -72,7 +72,7 @@ var ItemScore = styled.span``;
 var ItemTime = styled.time``;
 var ItemKids = styled.div``;
 
-export {
+exports =  {
     Items,
     ItemsList,
     ListItem,
@@ -80,7 +80,6 @@ export {
     ItemTitle,
     ItemMeta,
     ItemBy,
-    ItemText,
     ItemHost,
     ItemScore,
     ItemTime,

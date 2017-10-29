@@ -10,6 +10,8 @@ var CommentMixin = require('./mixins/CommentMixin')
 
 var cx = require('./utils/buildClassName')
 
+import { StyledComment, CommentContent, CommentKids } from './StyledComment';
+
 /**
  * A comment in a thread.
  */
@@ -138,7 +140,7 @@ var Comment = React.createClass({
     if (!comment) {
       return this.renderError(comment, {
         id: this.props.id,
-        className: 'Comment Comment--error Comment--level' + props.level
+        level: props.level
       })
     }
     // Render a placeholder while we're waiting for the comment to load
@@ -149,7 +151,7 @@ var Comment = React.createClass({
     if (comment.deleted) {
       if (!SettingsStore.showDeleted) { return null }
       return this.renderCommentDeleted(comment, {
-        className: 'Comment Comment--deleted Comment--level' + props.level
+        level: props.level
       })
     }
 
@@ -157,14 +159,9 @@ var Comment = React.createClass({
     var collapsed = !!props.threadStore.isCollapsed[comment.id]
     var childCounts = (collapsed && props.threadStore.getChildCounts(comment))
     if (collapsed && isNew) { childCounts.newComments = 0 }
-    var className = cx('Comment Comment--level' + props.level, {
-      'Comment--collapsed': collapsed,
-      'Comment--dead': comment.dead,
-      'Comment--new': isNew
-    })
 
-    return <div className={className}>
-      <div className="Comment__content">
+    return <StyledComment level={props.level} collapsed dead={comment.dead} isNew>
+      <CommentContent>
         {this.renderCommentMeta(comment, {
           collapsible: true,
           collapsed: collapsed,
@@ -172,8 +169,8 @@ var Comment = React.createClass({
           childCounts: childCounts
         })}
         {this.renderCommentText(comment, {replyLink: true})}
-      </div>
-      {comment.kids && <div className="Comment__kids">
+      </CommentContent>
+      {comment.kids && <CommentKids>
         {comment.kids.map(function(id) {
           return <Comment key={id} id={id}
             level={props.level + 1}
@@ -181,8 +178,8 @@ var Comment = React.createClass({
             threadStore={props.threadStore}
           />
         })}
-      </div>}
-    </div>
+      </CommentKids>}
+    </StyledComment>
   }
 })
 

@@ -14,6 +14,8 @@ var CommentMixin = require('./mixins/CommentMixin')
 var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
+import { StyledPermalinkedComment, CommentContent, CommentKids } from './StyledComment';
+
 var PermalinkedComment = React.createClass({
   mixins: [CommentMixin, ReactFireMixin],
 
@@ -111,7 +113,7 @@ var PermalinkedComment = React.createClass({
     if (!comment) {
       return this.renderError(comment, {
         id: this.props.params.id,
-        className: 'Comment Comment--level0 Comment--error'
+        level: 0
       })
     }
     // Render a placeholder while we're waiting for the comment to load
@@ -119,24 +121,23 @@ var PermalinkedComment = React.createClass({
     // Render a link to HN for deleted comments
     if (comment.deleted) {
       return this.renderCommentDeleted(comment, {
-        className: 'Comment Comment--level0 Comment--deleted'
+        level: 0
       })
     }
     // XXX Don't render anything if we're replacing the route after loading a non-comment
     if (comment.type !== 'comment') { return null }
 
-    var className = cx('PermalinkedComment Comment Comment--level0', {'Comment--dead': comment.dead})
     var threadStore = this.threadStore
 
-    return <div className={className}>
-      <div className="Comment__content">
+    return <StyledPermalinkedComment level={0} dead={comment.dead}>
+      <CommentContent>
         {this.renderCommentMeta(comment, {
           parent: !!this.state.parent.id && !!this.state.op.id && comment.parent !== this.state.op.id,
           op: !!this.state.op.id
         })}
         {(!comment.dead || SettingsStore.showDead) && this.renderCommentText(comment, {replyLink: true})}
-      </div>
-      {comment.kids && <div className="Comment__kids">
+      </CommentContent>
+      {comment.kids && <CommentKids>
         {comment.kids.map(function(id, index) {
           return <Comment key={id} id={id}
             level={0}
@@ -144,8 +145,8 @@ var PermalinkedComment = React.createClass({
             threadStore={threadStore}
           />
         })}
-      </div>}
-    </div>
+      </CommentKids>}
+    </StyledPermalinkedComment>
   }
 })
 

@@ -9,6 +9,9 @@ var Spinner = require('../Spinner')
 
 var pluralise = require('../utils/pluralise')
 
+import { StyledComment, CommentText, CommentContent, CommentMeta, CommentCollapse, CommentUser } from '../StyledComment';
+const LinkCommentUser = CommentUser.withComponent(Link);
+
 var CommentMixin = {
   fetchAncestors(comment) {
     ItemStore.fetchCommentAncestors(comment, result => {
@@ -36,39 +39,39 @@ var CommentMixin = {
   },
 
   renderCommentLoading(comment) {
-    return <div className={'Comment Comment--loading Comment--level' + this.props.level}>
+    return <StyledComment loading level={this.props.level}>
       {(this.props.loadingSpinner || comment.delayed) && <Spinner size="20"/>}
-      {comment.delayed && <div className="Comment__text">
+      {comment.delayed && <CommentText>
         Unable to load comment &ndash; this usually indicates the author has configured a delay.
         Trying again in 30 seconds.
-      </div>}
-    </div>
+      </CommentText>}
+    </StyledComment>
   },
 
   renderCommentDeleted(comment, options) {
-    return <div className={options.className}>
-      <div className="Comment__content">
-        <div className="Comment__meta">
+    return <StyledComment deleted level={options.level || 0}>
+      <CommentContent>
+        <CommentMeta>
           [deleted] | <a href={'https://news.ycombinator.com/item?id=' + comment.id}>view on Hacker News</a>
-        </div>
-      </div>
-    </div>
+        </CommentMeta>
+      </CommentContent>
+    </StyledComment>
   },
 
   renderError(comment, options) {
-    return <div className={options.className}>
-      <div className="Comment__content">
-        <div className="Comment__meta">
+    return <StyledComment level={options.level || 0}>
+      <CommentContent>
+        <CommentMeta>
           [error] | comment is {JSON.stringify(comment)} | <a href={'https://news.ycombinator.com/item?id=' + options.id}>view on Hacker News</a>
-        </div>
-      </div>
-    </div>
+        </CommentMeta>
+      </CommentContent>
+    </StyledComment>
   },
 
   renderCollapseControl(collapsed) {
-    return <span className="Comment__collapse" onClick={this.toggleCollapse} onKeyPress={this.toggleCollapse} tabIndex="0">
+    return <CommentCollapse onClick={this.toggleCollapse} onKeyPress={this.toggleCollapse} tabIndex="0">
       [{collapsed ? '+' : '–'}]
-    </span>
+    </CommentCollapse>
   },
 
   /**
@@ -81,7 +84,7 @@ var CommentMixin = {
    */
   renderCommentMeta(comment, options) {
     if (comment.dead && !SettingsStore.showDead) {
-      return <div className="Comment__meta">
+      return <CommentMeta>
         {options.collapsible && this.renderCollapseControl(options.collapsed)}
         {options.collapsible && ' '}
         [dead]
@@ -89,13 +92,13 @@ var CommentMixin = {
         {options.childCounts && options.childCounts.newComments > 0 && ', '}
         {options.childCounts && options.childCounts.newComments > 0 && <em>{options.childCounts.newComments} new</em>}
         {options.childCounts && ')'}
-      </div>
+      </CommentMeta>
     }
 
-    return <div className="Comment__meta">
+    return <CommentMeta>
       {options.collapsible && this.renderCollapseControl(options.collapsed)}
       {options.collapsible && ' '}
-      <Link to={`/user/${comment.by}`} className="Comment__user">{comment.by}</Link>{' '}
+      <LinkCommentUser to={`/user/${comment.by}`}>{comment.by}</LinkCommentUser>{' '}
       <TimeAgo date={comment.time * 1000}/>
       {options.link && ' | '}
       {options.link && <Link to={`/comment/${comment.id}`}>link</Link>}
@@ -108,16 +111,16 @@ var CommentMixin = {
       {options.childCounts && options.childCounts.newComments > 0 && ', '}
       {options.childCounts && options.childCounts.newComments > 0 && <em>{options.childCounts.newComments} new</em>}
       {options.childCounts && ')'}
-    </div>
+    </CommentMeta>
   },
 
   renderCommentText(comment, options) {
-    return <div className="Comment__text">
+    return <CommentText>
       {(!comment.dead || SettingsStore.showDead) ? <div dangerouslySetInnerHTML={{__html: comment.text}}/> : '[dead]'}
       {SettingsStore.replyLinks && options.replyLink && !comment.dead && <p>
         <a href={`https://news.ycombinator.com/reply?id=${comment.id}`}>reply</a>
       </p>}
-    </div>
+    </CommentText>
   }
 }
 

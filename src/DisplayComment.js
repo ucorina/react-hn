@@ -6,6 +6,8 @@ var CommentMixin = require('./mixins/CommentMixin')
 
 var cx = require('./utils/buildClassName')
 
+import { StyledComment, CommentContent } from './StyledComment';
+
 /**
  * Displays a standalone comment passed as a prop.
  */
@@ -32,20 +34,17 @@ var DisplayComment = React.createClass({
     if (this.props.comment.dead && !SettingsStore.showDead) { return null }
 
     var comment = this.props.comment
-    var className = cx('Comment Comment--level0', {
-      'Comment--dead': comment.dead
-    })
 
-    return <div className={className}>
-      <div className="Comment__content">
+    return <StyledComment level={0} dead={comment.dead}>
+      <CommentContent>
         {this.renderCommentMeta(comment, {
           link: true,
           parent: !!this.state.parent.id && !!this.state.op.id && comment.parent !== this.state.op.id,
           op: !!this.state.op.id
         })}
         {this.renderCommentText(comment, {replyLink: false})}
-      </div>
-    </div>
+      </CommentContent>
+    </StyledComment>
   }
 })
 
