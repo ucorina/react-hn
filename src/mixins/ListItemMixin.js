@@ -4,6 +4,8 @@ var Link = require('react-router/lib/Link')
 var SettingsStore = require('../stores/SettingsStore')
 var cx = require('../utils/buildClassName')
 
+import { ListItem, ListItemNewComments} from '../Items';
+
 /**
  * Reusable logic for displaying an item in a list.
  * Must be used in conjunction with ItemMixin for its rendering methods.
@@ -19,14 +21,14 @@ var ListItemMixin = {
   renderListItem(item, threadState) {
     if (item.deleted) { return null }
     var newCommentCount = this.getNewCommentCount(item, threadState)
-    return <li className={cx('ListItem', {'ListItem--dead': item.dead})} style={{marginBottom: SettingsStore.listSpacing}}>
+    return <ListItem dead={item.dead} style={{marginBottom: SettingsStore.listSpacing}}>
       {this.renderItemTitle(item)}
-      {this.renderItemMeta(item, (newCommentCount > 0 && <span className="ListItem__newcomments">{' '}
+      {this.renderItemMeta(item, (newCommentCount > 0 && <ListItemNewComments>{' '}
         (<Link to={`/${item.type}/${item.id}`}>
           {newCommentCount} new
         </Link>)
-      </span>))}
-    </li>
+      </ListItemNewComments>))}
+    </ListItem>
   }
 }
 

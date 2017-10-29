@@ -1,4 +1,5 @@
 require('isomorphic-fetch')
+import { ItemsList, ListItem } from './src/Items';
 
 /*
 The official Firebase API (https://github.com/HackerNews/API) requires multiple network
@@ -25,19 +26,19 @@ exports.fetchNews = function(page) {
 	return fetch('http://node-hnapi.herokuapp.com/news' + page).then(function(response) {
 	  return response.json()
 	}).then(function(json) {
-	  var stories = '<ol class="Items__list" start="1">'
+	  var stories = '<ItemsList start="1">'
 	  json.forEach(function(data, index) {
-	      var story = '<li class="ListItem" style="margin-bottom: 16px;">' +
+	      var story = '<ListItem style="margin-bottom: 16px;">' +
 	          '<div class="Item__title" style="font-size: 18px;"><a href="' + data.url + '">' + data.title + '</a> ' +
 	          '<span class="Item__host">(' + data.domain + ')</span></div>' +
 	          '<div class="Item__meta"><span class="Item__score">' + data.points + ' points</span> ' +
 	          '<span class="Item__by">by <a href="https://news.ycombinator.com/user?id=' + data.user + '">' + data.user + '</a></span> ' +
 	          '<time class="Item__time">' + data.time_ago + ' </time> | ' +
 	          '<a href="/news/story/' + data.id + '">' + data.comments_count + ' comments</a></div>'
-	      '</li>'
+	      '</ListItem>'
 	      stories += story
 	  })
-	  stories += '</ol>'
+	  stories += '</ItemsList>'
 	  return stories
 	})		
 }

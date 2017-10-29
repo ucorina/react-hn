@@ -12,6 +12,8 @@ var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
 var setTitle = require('./utils/setTitle')
 
+import { Items, ItemsList, ListItem } from './Items';
+
 var Stories = React.createClass({
   mixins: [PageNumberMixin],
 
@@ -71,23 +73,23 @@ var Stories = React.createClass({
       var dummyItems = []
       for (var i = page.startIndex; i < page.endIndex; i++) {
         dummyItems.push(
-          <li key={i} className="ListItem ListItem--loading" style={{marginBottom: SettingsStore.listSpacing}}>
+          <ListItem loading key={i} style={{marginBottom: SettingsStore.listSpacing}}>
             <Spinner/>
-          </li>
+          </ListItem>
         )
       }
-      return <div className="Items Items--loading">
-        <ol className="Items__list" start={page.startIndex + 1}>{dummyItems}</ol>
+      return <Items loading>
+        <ItemsList start={page.startIndex + 1}>{dummyItems}</ItemsList>
         <Paginator route={this.props.route} page={page.pageNum} hasNext={page.hasNext}/>
-      </div>
+      </Items>
     }
 
-    return <div className="Items">
-      <ol className="Items__list" start={page.startIndex + 1}>
+    return <Items>
+      <ItemsList start={page.startIndex + 1}>
         {this.renderItems(page.startIndex, page.endIndex)}
-      </ol>
+      </ItemsList>
       <Paginator route={this.props.route} page={page.pageNum} hasNext={page.hasNext}/>
-    </div>
+    </Items>
   },
 
   renderItems(startIndex, endIndex) {

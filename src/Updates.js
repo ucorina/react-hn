@@ -14,6 +14,8 @@ var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
 var setTitle = require('./utils/setTitle')
 
+import { ItemsList } from './Items';
+
 function filterDead(item) {
   return !item.dead
 }
@@ -84,11 +86,11 @@ var Updates = React.createClass({
     }
     else {
       return <div className="Updates Items">
-        <ol className="Items__list" start={page.startIndex + 1}>
+        <ItemsList start={page.startIndex + 1}>
           {items.slice(page.startIndex, page.endIndex).map(function(item) {
             return <DisplayListItem key={item.id} item={item}/>
           })}
-        </ol>
+        </ItemsList>
         <Paginator route="newest" page={page.pageNum} hasNext={page.hasNext}/>
       </div>
     }

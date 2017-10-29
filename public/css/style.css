@@ -17,20 +17,6 @@ span.control {
 span.control:hover {
   text-decoration: underline;
 }
-
-.Items__list {
-  padding-left: 3em;
-  padding-right: 1.25em;
-  margin-top: 1em;
-  margin-bottom: .5em;
-}
-.ListItem {
-  margin-bottom: 16px;
-}
-.ListItem--loading {
-  min-height: 34px;
-}
-
 .Updates--loading {
   padding: 1em 1.25em 0 1.25em;
   margin-bottom: 1em;
