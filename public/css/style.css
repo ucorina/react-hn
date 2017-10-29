@@ -17,17 +17,6 @@ span.control {
 span.control:hover {
   text-decoration: underline;
 }
-.Updates--loading {
-  padding: 1em 1.25em 0 1.25em;
-  margin-bottom: 1em;
-}
-.Updates__notice {
-  padding: 0 1.25em;
-}
-.Updates .Comment {
-  margin-bottom: .75em;
-}
-
 .Paginator {
   margin-left: 3em;
   padding: .5em 0;

@@ -16,6 +16,22 @@ var setTitle = require('./utils/setTitle')
 
 import { ItemsList } from './Items';
 
+import styled from 'styled-components';
+
+var StyledUpdates = styled.div`
+  ${props => props.loading ? 'padding: 1em 1.25em 0 1.25em': ''}
+  ${props => props.loading ? 'margin-bottom: 1em;': ''}
+`;
+
+var CommentUpdates = styled(StyledUpdates)`
+  margin-bottom: .75em;
+`;
+
+var ItemUpdates = styled(StyledUpdates)`
+
+`;
+
+
 function filterDead(item) {
   return !item.dead
 }
@@ -71,28 +87,28 @@ var Updates = React.createClass({
   render() {
     var items = (this.props.type === 'comments' ? this.state.comments : this.state.stories)
     if (items.length === 0) {
-      return <div className="Updates Updates--loading"><Spinner size="20"/></div>
+      return <StyledUpdates loading><Spinner size="20"/></StyledUpdates>
     }
 
     var page = pageCalc(this.getPageNumber(), ITEMS_PER_PAGE, items.length)
 
     if (this.props.type === 'comments') {
-      return <div className="Updates Comments">
+      return <CommentUpdates>
         {items.slice(page.startIndex, page.endIndex).map(function(comment) {
           return <DisplayComment key={comment.id} id={comment.id} comment={comment}/>
         })}
         <Paginator route="newcomments" page={page.pageNum} hasNext={page.hasNext}/>
-      </div>
+      </CommentUpdates>
     }
     else {
-      return <div className="Updates Items">
+      return <ItemUpdates>
         <ItemsList start={page.startIndex + 1}>
           {items.slice(page.startIndex, page.endIndex).map(function(item) {
             return <DisplayListItem key={item.id} item={item}/>
           })}
         </ItemsList>
         <Paginator route="newest" page={page.pageNum} hasNext={page.hasNext}/>
-      </div>
+      </ItemUpdates>
     }
   }
 })

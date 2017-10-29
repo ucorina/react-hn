@@ -9,6 +9,10 @@ import App from '../src/App';
 import Settings from '../src/Settings';
 import Stories from '../src/Stories';
 import { Items, ItemsList, ListItem, ListItemNewComments } from '../src/Items';
+import Updates from '../src/Updates';
+
+import UpdatesStore from '../src/stores/UpdatesStore';
+UpdatesStore.loadSession();
 
 import '../public/css/style.css';
 
@@ -61,3 +65,7 @@ storiesOf('List item', module)
             </ListItemNewComments>
         </ListItem>
     )
+
+storiesOf('Updates', module)
+    .add('default', () =>  
+        <Updates key={'jobs'} type={'jobs'} location={{ query: { page: 1 }}}/>)
