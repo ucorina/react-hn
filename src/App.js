@@ -8,6 +8,22 @@ var UpdatesStore = require('./stores/UpdatesStore')
 var SettingsStore = require('./stores/SettingsStore')
 
 var styled = require('styled-components').default;
+var injectGlobal = require('styled-components').injectGlobal;
+injectGlobal`
+  body {
+    background-color: #fff;
+    margin: 0;
+  }
+  form {
+    margin: 0;
+  }
+  img {
+    vertical-align: text-bottom;
+  }
+  pre {
+    white-space: pre-wrap;
+  }
+`;
 
 var StyledApp = styled.div`
 `;

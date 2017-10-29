@@ -45,6 +45,13 @@ var ItemPoll = styled.div`
   padding-left: 2.5em;
 `;
 
+var Control = styled.span`
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 function timeUnitsAgo(value, unit, suffix) {
   if (value === 1) {
     return unit
@@ -178,18 +185,18 @@ var Item = React.createClass({
     var state = this.state
     var item = state.item
     var threadStore = this.threadStore
-    if (!item.id || !threadStore) { return <StyledItem loading><Spinner size="20"/></StyledItem> }
+    if (!item.id || !threadStore) { return <StyledItem loa  ding><Spinner size="20"/></StyledItem> }
     return <StyledItem dead={item.dead}>
       <ItemContent>
         {this.renderItemTitle(item)}
         {this.renderItemMeta(item, (threadStore.lastVisit !== null && threadStore.newCommentCount > 0 && <span>{' '}
           (<em>{threadStore.newCommentCount} new</em> in the last <TimeAgo date={threadStore.lastVisit} formatter={timeUnitsAgo}/>{') | '}
-          <span className="control" tabIndex="0" onClick={this.autoCollapse} onKeyPress={this.autoCollapse} title="Collapse threads without new comments">
+          <Control tabIndex="0" onClick={this.autoCollapse} onKeyPress={this.autoCollapse} title="Collapse threads without new comments">
             auto collapse
-          </span>{' | '}
-          <span className="control" tabIndex="0" onClick={this.markAsRead} onKeyPress={this.markAsRead}>
+          </Control>{' | '}
+          <Control tabIndex="0" onClick={this.markAsRead} onKeyPress={this.markAsRead}>
             mark as read
-          </span>
+          </Control>
         </span>))}
         {item.text && <ItemText>
           <div dangerouslySetInnerHTML={{__html: item.text}}/>
