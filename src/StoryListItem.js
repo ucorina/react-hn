@@ -11,7 +11,7 @@ var ItemMixin = require('./mixins/ItemMixin')
 var ListItemMixin = require('./mixins/ListItemMixin')
 var Spinner = require('./Spinner')
 
-import { ListItem } from './Items';
+let ListItem = require('./Items').ListItem;
 
 /**
  * Display story title and metadata as as a list item.

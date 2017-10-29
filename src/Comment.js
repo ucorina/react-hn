@@ -8,9 +8,8 @@ var SettingsStore = require('./stores/SettingsStore')
 
 var CommentMixin = require('./mixins/CommentMixin')
 
-var cx = require('./utils/buildClassName')
-
-import { StyledComment, CommentContent, CommentKids } from './StyledComment';
+var StyledCommentModule = require('./StyledComment');
+let { StyledComment, CommentContent, CommentKids } = StyledCommentModule;
 
 /**
  * A comment in a thread.

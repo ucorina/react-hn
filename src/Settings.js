@@ -1,5 +1,5 @@
 var React = require('react')
-import styled from 'styled-components';
+var styled = require('styled-components').default;;
 
 var SettingsContainer = styled.div`
   box-sizing: border-box;

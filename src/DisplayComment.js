@@ -4,9 +4,8 @@ var SettingsStore = require('./stores/SettingsStore')
 
 var CommentMixin = require('./mixins/CommentMixin')
 
-var cx = require('./utils/buildClassName')
-
-import { StyledComment, CommentContent } from './StyledComment';
+var StyledCommentModule = require('./StyledComment');
+let { StyledComment, CommentContent } = StyledCommentModule;
 
 /**
  * Displays a standalone comment passed as a prop.

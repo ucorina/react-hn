@@ -1,5 +1,6 @@
 var React = require('react')
-import styled, { keyframes } from 'styled-components';
+var styled = require('styled-components').default;
+var keyframes = require('styled-components').keyframes;
 
 /* From https://github.com/tobiasahlin/SpinKit */
 var StyledSpinner = styled.div`

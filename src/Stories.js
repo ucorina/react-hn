@@ -12,7 +12,8 @@ var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
 var setTitle = require('./utils/setTitle')
 
-import { Items, ItemsList, ListItem } from './Items';
+var ItemsModule = require('./Items');
+let { Items, ItemsList, ListItem } = ItemsModule;
 
 var Stories = React.createClass({
   mixins: [PageNumberMixin],

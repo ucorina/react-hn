@@ -14,9 +14,9 @@ var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
 var setTitle = require('./utils/setTitle')
 
-import { ItemsList } from './Items';
+let ItemsList = require('./Items').ItemsList;
 
-import styled from 'styled-components';
+var styled = require('styled-components').default;;
 
 var StyledUpdates = styled.div`
   ${props => props.loading ? 'padding: 1em 1.25em 0 1.25em': ''}

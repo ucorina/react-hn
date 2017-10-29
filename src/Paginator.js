@@ -1,7 +1,7 @@
 var React = require('react')
 var Link = require('react-router/lib/Link')
 
-import styled from 'styled-components';
+var styled = require('styled-components').default;;
 
 var StyledPaginator = styled.div`
   margin-left: 3em;

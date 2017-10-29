@@ -16,9 +16,9 @@ var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
 var SettingsStore = require('./stores/SettingsStore')
-import { ItemKids } from './Items';
+var ItemKids = require('./Items').ItemKids;
 
-import styled from 'styled-components';
+var styled = require('styled-components').default;;
 
 var contentSpacing = {
   padding: '1em 1.25em 0 1.25em',

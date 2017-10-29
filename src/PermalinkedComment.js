@@ -11,10 +11,10 @@ var UpdatesStore = require('./stores/UpdatesStore')
 var Comment = require('./Comment')
 var CommentMixin = require('./mixins/CommentMixin')
 
-var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
-import { StyledPermalinkedComment, CommentContent, CommentKids } from './StyledComment';
+var StyledCommentModule = require('./StyledComment');
+let { StyledPermalinkedComment, CommentContent, CommentKids } = StyledCommentModule;
 
 var PermalinkedComment = React.createClass({
   mixins: [CommentMixin, ReactFireMixin],

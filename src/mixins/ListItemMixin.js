@@ -4,7 +4,8 @@ var Link = require('react-router/lib/Link')
 var SettingsStore = require('../stores/SettingsStore')
 var cx = require('../utils/buildClassName')
 
-import { ListItem, ListItemNewComments} from '../Items';
+var ItemsModule = require('../Items');
+let { ListItem, ListItemNewComments} = ItemsModule;
 
 /**
  * Reusable logic for displaying an item in a list.

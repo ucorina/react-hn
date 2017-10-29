@@ -6,7 +6,8 @@ var SettingsStore = require('../stores/SettingsStore')
 var pluralise = require('../utils/pluralise')
 var urlParse = require('url-parse')
 
-import { ItemTitle, ItemMeta, ItemBy, ItemTime, ItemScore, ItemHost } from '../Items';
+var ItemsModule = require('../Items');
+let { ItemTitle, ItemMeta, ItemBy, ItemTime, ItemScore, ItemHost } = ItemsModule;
 
 var ItemTimeAgo = ItemTime.withComponent(TimeAgo);
 

@@ -7,7 +7,7 @@ var StoryStore = require('./stores/StoryStore')
 var UpdatesStore = require('./stores/UpdatesStore')
 var SettingsStore = require('./stores/SettingsStore')
 
-import styled from 'styled-components';
+var styled = require('styled-components').default;
 
 var StyledApp = styled.div`
 `;

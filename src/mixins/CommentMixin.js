@@ -9,7 +9,11 @@ var Spinner = require('../Spinner')
 
 var pluralise = require('../utils/pluralise')
 
-import { StyledComment, CommentText, CommentContent, CommentMeta, CommentCollapse, CommentUser } from '../StyledComment';
+var StyledCommentModule = require('../StyledComment');
+
+let { StyledComment, CommentText, CommentContent,
+   CommentMeta, CommentCollapse, CommentUser } = StyledCommentModule;
+
 const LinkCommentUser = CommentUser.withComponent(Link);
 
 var CommentMixin = {

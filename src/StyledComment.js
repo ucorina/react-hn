@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+var styled = require('styled-components').default;;
 
 const commentSpacing = {
     paddingRight: '1.25em',
@@ -23,6 +23,50 @@ const commentSpacing = {
         15: '38.75em'
     }
 };
+
+const CommentContent = styled.div`
+    padding-right: ${props => commentSpacing.paddingRight};
+    padding-top: ${props => commentSpacing.paddingTop};
+    padding-bottom: ${props => commentSpacing.paddingBottom};
+`;
+
+const CommentText = styled.div`
+    a {
+        color: #000;
+
+        &:visited {
+            color: #666;
+        }
+    }
+
+    p:last-child, 
+    pre:last-child {
+        margin-bottom: 0;
+    }
+`;
+
+
+const CommentMeta = styled.div`
+    color: #666;
+    margin-bottom: .5em
+
+    a {
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    em {
+        font-style: normal;
+        background-color: #ffffde;
+        color: #000;
+    }
+`;
+
+const CommentKids = styled.div``;
 
 var propTypes = {
     loading: true,
@@ -58,53 +102,8 @@ const StyledComment = styled.div`
 
 `;
 
-const CommentContent = styled.div`
-    padding-right: ${props => commentSpacing.paddingRight};
-    padding-top: ${props => commentSpacing.paddingTop};
-    padding-bottom: ${props => commentSpacing.paddingBottom};
-`;
-
-const CommentMeta = styled.div`
-    color: #666;
-    margin-bottom: .5em
-
-    a {
-        text-decoration: none;
-        color: inherit;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    em {
-        font-style: normal;
-        background-color: #ffffde;
-        color: #000;
-    }
-`;
-
 const CommentUser = styled.a`
     font-weight: bold;
-`;
-
-const CommentText = styled.div`
-    a {
-        color: #000;
-
-        &:visited {
-            color: #666;
-        }
-    }
-
-    p:last-child, 
-    pre:last-child {
-        margin-bottom: 0;
-    }
-`;
-
-const CommentKids = styled.div`
-
 `;
 
 const CommentCollapse = styled.span`
@@ -117,14 +116,11 @@ const StyledPermalinkedComment = styled(StyledComment)`
     }
 `;
 
-
-export {
-    StyledComment,
-    CommentContent,
-    CommentCollapse,
-    CommentMeta,
-    CommentKids,
-    CommentText,
-    CommentUser,
-    StyledPermalinkedComment
-}
+exports.StyledComment = StyledComment;
+exports.CommentContent = CommentContent;
+exports.CommentCollapse = CommentCollapse;
+exports.CommentMeta = CommentMeta;
+exports.CommentKids = CommentKids;
+exports.CommentText = CommentText;
+exports.CommentUser = CommentUser;
+exports.StyledPermalinkedComment = StyledPermalinkedComment;
