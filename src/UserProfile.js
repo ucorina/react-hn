@@ -23,6 +23,9 @@ var StyledUserProfile = styled.div`
   }
 `;
 
+var UserProfileAbout = styled.div`
+`;
+
 var UserProfile = React.createClass({
   mixins: [ReactFireMixin],
   getInitialState() {
@@ -49,13 +52,13 @@ var UserProfile = React.createClass({
   render() {
     var user = this.state.user
     if (!user.id) {
-      return <div className="UserProfile UserProfile--loading">
+      return <StyledUserProfile loading>
         <h4>{this.props.params.id}</h4>
         <Spinner size="20"/>
-      </div>
+      </StyledUserProfile>
     }
     var createdDate = new Date(user.created * 1000)
-    return <div className="UserProfile">
+    return <StyledUserProfile>
       <h4>{user.id}</h4>
       <dl>
         <dt>Created</dt>
@@ -65,9 +68,9 @@ var UserProfile = React.createClass({
         <dt>Delay</dt>
         <dd>{user.delay}</dd>
         {user.about && <dt>About</dt>}
-        {user.about && <dd><div className="UserProfile__about" dangerouslySetInnerHTML={{__html: user.about}}/></dd>}
+        {user.about && <dd><UserProfileAbout dangerouslySetInnerHTML={{__html: user.about}}/></dd>}
       </dl>
-    </div>
+    </StyledUserProfile>
   }
 })
 

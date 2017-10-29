@@ -12,7 +12,6 @@ var PollOption = require('./PollOption')
 var Spinner = require('./Spinner')
 var ItemMixin = require('./mixins/ItemMixin')
 
-var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
 var SettingsStore = require('./stores/SettingsStore')

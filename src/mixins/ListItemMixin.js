@@ -2,7 +2,6 @@ var React = require('react')
 var Link = require('react-router/lib/Link')
 
 var SettingsStore = require('../stores/SettingsStore')
-var cx = require('../utils/buildClassName')
 
 var ItemsModule = require('../Items');
 let { ListItem, ListItemNewComments} = ItemsModule;
