@@ -12,6 +12,17 @@ var setTitle = require('./utils/setTitle')
 
 // TODO User comments
 
+var styled = require('styled-components').default;
+
+var StyledUserProfile = styled.div`
+  padding-left: 1.25em;
+  padding-top: 1em;
+
+  h4 {
+    margin: 0 0 1em 0;
+  }
+`;
+
 var UserProfile = React.createClass({
   mixins: [ReactFireMixin],
   getInitialState() {

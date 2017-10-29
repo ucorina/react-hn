@@ -19,6 +19,7 @@ import { StyledComment, CommentContent, CommentText,
     CommentMeta, CommentUser, CommentCollapse } from '../src/StyledComment';
 
 import PollOption from '../src/PollOption';
+import UserProfile from '../src/UserProfile';
 
 import '../public/css/style.css';
 
@@ -100,3 +101,6 @@ storiesOf('Comment', module)
 
 storiesOf('Poll option', module)
     .add('default', () => <PollOption id={6527104}></PollOption>)
+
+storiesOf('User profile', module)
+    .add('default', () => <UserProfile params={{ id: "miiiiiike" }}></UserProfile>)    
